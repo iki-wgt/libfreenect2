@@ -27,7 +27,7 @@
 #ifndef FRAME_LISTENER_HPP_
 #define FRAME_LISTENER_HPP_
 
-#include <cstddef>
+#include <map>
 
 namespace libfreenect2
 {
@@ -58,12 +58,21 @@ struct Frame
   }
 };
 
+typedef std::map<Frame::Type, Frame*> FrameMap;
+
 class FrameListener
 {
 public:
   virtual ~FrameListener();
 
   virtual bool onNewFrame(Frame::Type type, Frame *frame) = 0;
+
+  virtual void waitForNewFrame(FrameMap &frame) = 0;
+
+  virtual void release(FrameMap &frame) = 0;
+
+
+  static FrameListener* create(unsigned int frame_types);
 };
 
 } /* namespace libfreenect2 */
