@@ -40,7 +40,7 @@ DefaultPacketPipeline::DefaultPacketPipeline()
   depth_parser_ = new DepthPacketStreamParser();
 
   rgb_processor_ = new TurboJpegRgbPacketProcessor();
-  OpenGLDepthPacketProcessor *depth_processor = new OpenGLDepthPacketProcessor(0);
+  CpuDepthPacketProcessor *depth_processor = new CpuDepthPacketProcessor();
   depth_processor->load11To16LutFromFile("");
   depth_processor->loadXTableFromFile("");
   depth_processor->loadZTableFromFile("");
