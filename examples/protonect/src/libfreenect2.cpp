@@ -284,6 +284,21 @@ public:
             else
             {
               std::cout << "[Freenect2Impl] failed to open Kinect v2 " << PrintBusAndDevice(dev) << "!" << std::endl;
+              switch(r)
+              {
+                case LIBUSB_ERROR_NO_MEM:
+                    std::cout << "[Freenect2Impl] memory allocation failure!" << std::endl;
+                    break;
+                case LIBUSB_ERROR_ACCESS:
+                    std::cout << "[Freenect2Impl] you have insufficient permissions!" << std::endl;
+                    break;
+                case LIBUSB_ERROR_NO_DEVICE:
+                    std::cout << "[Freenect2Impl] device has been disconnected!" << std::endl;
+                    break;
+                default:
+                    std::cout << "[Freenect2Impl] other libusb failure!" << std::endl;
+              }
+              
             }
           }
         }
